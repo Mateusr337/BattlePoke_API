@@ -1,0 +1,86 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int    @id @default(autoincrement())
+  name      String @unique
+  email     String @unique
+  password  String
+  level     String @default("0")
+  imagemURL String
+
+  PokemonUser PokemonUser[]
+  Battle      Battle[]
+  BattleUser  BattleUser[]
+  @@map("users")
+}
+
+model Pokemon {
+  id             Int          @id @default(autoincrement())
+  name           String       @unique
+  pokemonTypeId  Int
+  pokemonType    PokemonType  @relation(fields: [pokemonTypeId], references: [id])
+  pokemonLevelId Int
+  pokemonLevel   PokemonLevel @relation(fields: [pokemonLevelId], references: [id])
+  life           Int
+  attack         Int
+  imageURL       String
+
+  PokemonUser PokemonUser[]
+  @@map("pokemons")
+}
+
+model PokemonUser {
+  id        Int     @id @default(autoincrement())
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+  pokemonId Int
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
+
+  @@map("pokemonsUsers")
+}
+
+model PokemonLevel {
+  id     Int    @id @default(autoincrement())
+  name   String @unique
+  number String @unique
+
+  @@map("pokemonsLevels")
+  Pokemon Pokemon[]
+}
+
+model PokemonType {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  Pokemon Pokemon[]
+  @@map("pokemonsTypes")
+}
+
+model Battle {
+  id     Int  @id @default(autoincrement())
+  winner Int
+  user   User @relation(fields: [winner], references: [id])
+
+  BattleUser BattleUser[]
+  @@map("battles")
+}
+
+model BattleUser {
+  id       Int    @id @default(autoincrement())
+  userId   Int
+  user     User   @relation(fields: [userId], references: [id])
+  battleId Int
+  battle   Battle @relation(fields: [battleId], references: [id])
+
+  @@map("battlesUsers")
+}

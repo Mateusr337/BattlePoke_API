@@ -1,0 +1,27 @@
+version: "3"
+services:
+  db:
+    image: postgres:13
+    container_name: db
+    restart: always #container reinicia se morrer
+    ports:
+      - 2345:5432
+    env_file:
+    - .env #configurar POSTGRES_USER, POSTGRES_PASSWORD e POSTGRES_DB
+    volumes:
+    - postgres:/var/lib/postgresql/data
+
+  node_app:
+    container_name: node_app
+    build: . #Dockerfile do node se encontra na pasta atual
+    ports:
+      - 5000:5000
+    depends_on:
+      - db # só sobe quando o postgres tiver no ar
+    env_file:
+      - .env #configurar DATABASE_URL
+    volumes:
+      - .:/usr/src/
+
+volumes:
+  postgres: 
