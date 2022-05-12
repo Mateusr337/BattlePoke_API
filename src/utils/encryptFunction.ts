@@ -8,7 +8,7 @@ function encryptData(data: string) {
 
 async function compareEncrypted(data: string, hash: string) {
   const match = await bcrypt.compare(data, hash);
-  if (!match) throw errors.unauthorizedError("password invalid");
+  if (!match) throw errors.unauthorizedError("e-mail or password");
 }
 
 const encryptFunctions = {
