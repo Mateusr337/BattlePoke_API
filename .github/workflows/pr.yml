@@ -1,21 +1,21 @@
 name: Pull Request
 on: [pull_request]
 jobs:
-    PullRequest:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Check out repository code
-              uses: actions/checkout@v3
-            - name: Make envfile
-              uses: SpicyPizza/create-envfile@v1
-              #precisamos criar um .env file por que o nosso está no gitignore
-              with:
-                  envkey_POSTGRES_USER: "postgres"
-                  envkey_POSTGRES_PASSWORD: ${{process.env.POSTGRES_PASSWORD}}
-                  envkey_POSTGRES_DB: ${{process.env.POSTGRES_BANK}}
-                  envkey_DATABASE_URL: ${{process.env.POSTGRES_URL}}
-                  file_name: .env.test
-            - name: Run tests
-              run: docker-compose -f docker-compose-test.yml run node_app npm run test
-            - name: Build
-              run: npm i && npm run build
+  PullRequest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
+        #precisamos criar um .env file por que o nosso está no gitignore
+        with:
+          envkey_POSTGRES_USER: "postgres"
+          envkey_POSTGRES_PASSWORD: ${{process.env.POSTGRES_PASSWORD}}
+          envkey_POSTGRES_DB: ${{process.env.POSTGRES_PROJECT}}
+          envkey_DATABASE_URL: ${{process.env.POSTGRES_URL}}
+          file_name: .env.test
+      - name: Run tests
+        run: docker-compose -f docker-compose-test.yml run node_app npm run test
+      - name: Build
+        run: npm i && npm run build

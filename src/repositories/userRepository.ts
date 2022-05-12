@@ -4,7 +4,7 @@ export interface InsertUserData {
   email: string;
   name: string;
   password: string;
-  imageURL?: string;
+  imageURL: string;
   level: string;
 }
 

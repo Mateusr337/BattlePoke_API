@@ -11,12 +11,12 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  name     String  @unique
-  email    String  @unique
+  id       Int    @id @default(autoincrement())
+  name     String @unique
+  email    String @unique
   password String
-  level    String  @default("0")
-  imageURL String?
+  level    String @default("0")
+  imageURL String
 
   PokemonUser PokemonUser[]
   Battle      Battle[]
