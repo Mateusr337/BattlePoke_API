@@ -1,3 +1,4 @@
+import errorFunctions from "./utils/errorFunctions.js";
 import "./setup.js";
 import cors from "cors";
 import express, { json } from "express";
@@ -8,6 +9,6 @@ const app = express();
 app.use(json());
 app.use(cors());
 app.use(router);
-// app.use(errorHandlerMiddleware);
+app.use(errorFunctions.errorHandlingMiddleware);
 
 export default app;
