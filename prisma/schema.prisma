@@ -11,16 +11,17 @@ datasource db {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  name      String @unique
-  email     String @unique
-  password  String
-  level     String @default("0")
-  imagemURL String
+  id       Int     @id @default(autoincrement())
+  name     String  @unique
+  email    String  @unique
+  password String
+  level    String  @default("0")
+  imageURL String?
 
   PokemonUser PokemonUser[]
   Battle      Battle[]
   BattleUser  BattleUser[]
+
   @@map("users")
 }
 
@@ -54,8 +55,8 @@ model PokemonLevel {
   name   String @unique
   number String @unique
 
-  @@map("pokemonsLevels")
   Pokemon Pokemon[]
+  @@map("pokemonsLevels")
 }
 
 model PokemonType {
