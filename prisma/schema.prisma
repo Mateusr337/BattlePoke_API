@@ -28,15 +28,14 @@ model User {
 model Pokemon {
   id             Int          @id @default(autoincrement())
   name           String       @unique
-  pokemonTypeId  Int
-  pokemonType    PokemonType  @relation(fields: [pokemonTypeId], references: [id])
   pokemonLevelId Int
   pokemonLevel   PokemonLevel @relation(fields: [pokemonLevelId], references: [id])
   life           Int
   attack         Int
   imageURL       String
 
-  PokemonUser PokemonUser[]
+  PokemonUser        PokemonUser[]
+  PokemonTypePokemon PokemonTypePokemon[]
   @@map("pokemons")
 }
 
@@ -63,8 +62,18 @@ model PokemonType {
   id   Int    @id @default(autoincrement())
   name String @unique
 
-  Pokemon Pokemon[]
+  PokemonTypePokemon PokemonTypePokemon[]
   @@map("pokemonsTypes")
+}
+
+model PokemonTypePokemon {
+  id            Int         @id @default(autoincrement())
+  pokemonTypeId Int
+  pokemonType   PokemonType @relation(fields: [pokemonTypeId], references: [id])
+  pokemonId     Int
+  pokemon       Pokemon     @relation(fields: [pokemonId], references: [id])
+
+  @@map("pokemonsTypesPokemons")
 }
 
 model Battle {
@@ -88,7 +97,7 @@ model BattleUser {
 
 model Session {
   id    Int    @id @default(autoincrement())
-  token String @unique
+  token String
 
   @@map("sessions")
 }
