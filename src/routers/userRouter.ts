@@ -9,8 +9,8 @@ const userRouter = Router();
 
 userRouter.post("/users", validateSchemaMiddleware(userSchema), userController.create);
 
-userRouter.get(
-  "/users/:token",
+userRouter.post(
+  "/users/validToken",
   ensureAuthenticatedMiddleware,
   userController.responseToken
 );
