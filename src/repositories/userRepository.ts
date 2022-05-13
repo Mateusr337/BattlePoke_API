@@ -18,7 +18,25 @@ async function findByEmail(email: string) {
   return user;
 }
 
+async function findById(id: number) {
+  const user = await prisma.user.findUnique({ where: { id } });
+  return user;
+}
+
+async function sessionInsert(token: string) {
+  const session = await prisma.session.create({ data: { token } });
+  return session;
+}
+
+async function sessionFind(token: string) {
+  const session = await prisma.session.findUnique({ where: { token } });
+  return session;
+}
+
 export default {
   create,
   findByEmail,
+  sessionInsert,
+  sessionFind,
+  findById,
 };
