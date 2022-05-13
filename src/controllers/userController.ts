@@ -16,17 +16,12 @@ async function valid(req: Request, res: Response) {
   res.send({ token });
 }
 
-async function validSession(req: Request, res: Response) {
-  const { token } = req.params;
-  console.log(token);
-  if (!token) errorFunctions.unauthorizedError("token invalid");
-
-  const session = await userService.validToken(token);
-  return session;
+async function responseToken(req: Request, res: Response) {
+  res.sendStatus(200);
 }
 
 export default {
   create,
   valid,
-  validSession,
+  responseToken,
 };

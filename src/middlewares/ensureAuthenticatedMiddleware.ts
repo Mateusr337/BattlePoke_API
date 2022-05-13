@@ -1,27 +1,29 @@
-// import { NextFunction, Request, Response } from "express";
-// import jwt from "jsonwebtoken";
-// import { unauthorizedError } from "../utils/errorUtils.js";
+import { NextFunction, Request, Response } from "express";
+import jwt from "jsonwebtoken";
+import userService from "../services/userService.js";
+import errorFunctions from "../utils/errorFunctions.js";
 
-// export async function ensureAuthenticatedMiddleware(
-// 	req: Request,
-// 	res: Response,
-// 	next: NextFunction
-// ) {
-// 	const authorization = req.headers["authorization"];
-// 	if (!authorization) throw unauthorizedError("Missing authorization header");
+export async function ensureAuthenticatedMiddleware(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  const authorization = req.headers["authorization"];
+  if (!authorization)
+    throw errorFunctions.unauthorizedError("Missing authorization header");
 
-// 	const token = authorization.replace("Bearer ", "");
-// 	if (!token) throw unauthorizedError("Missing token");
+  const token = authorization.replace("Bearer ", "");
+  if (!token) throw errorFunctions.unauthorizedError("Missing token");
 
-// 	try {
-// 		const { userId } = jwt.verify(token, process.env.JWT_SECRET) as {
-// 			userId: number;
-// 		};
-// 		const user = await userService.findById(userId);
-// 		res.locals.user = user;
+  try {
+    const { userId } = jwt.verify(token, process.env.JWT_SECRET) as {
+      userId: number;
+    };
+    const user = await userService.findById(userId);
+    res.locals.user = user;
 
-// 		next();
-// 	} catch {
-// 		throw unauthorizedError("Invalid token");
-// 	}
-// }
+    next();
+  } catch {
+    throw errorFunctions.unauthorizedError("Invalid token");
+  }
+}

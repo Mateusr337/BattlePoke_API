@@ -20,6 +20,7 @@ async function create(data: insertPartialUserData) {
 
 async function validUser(data: authUserData) {
   const user = await validEmailUser(data.email);
+
   await encryptFunctions.compareEncrypted(data.password, user.password);
 
   const expiration = { expiresIn: 60 * 60 * 24 * 30 };
@@ -36,15 +37,13 @@ async function validEmailUser(email: string) {
   return user;
 }
 
-async function validToken(token: string) {
-  const session = await userRepository.sessionFind(token);
-  if (!session) throw errorFunctions.unauthorizedError("token");
-
-  return session;
+async function findById(id: number) {
+  const user = await userRepository.findById(id);
+  return user;
 }
 
 export default {
   create,
   validUser,
-  validToken,
+  findById,
 };
