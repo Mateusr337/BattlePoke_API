@@ -9,7 +9,6 @@ export async function ensureAuthenticatedMiddleware(
   next: NextFunction
 ) {
   const authorization = req.headers.authorization as string;
-  console.log(req.headers);
   if (!authorization)
     throw errorFunctions.unauthorizedError("Missing authorization header");
 

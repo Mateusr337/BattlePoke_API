@@ -37,6 +37,13 @@ async function validEmailUser(email: string) {
   return user;
 }
 
+async function findByIdOrFail(id: number) {
+  const user = await userRepository.findById(id);
+  if (!user) throw errorFunctions.notFoundError("user");
+
+  return user;
+}
+
 async function findById(id: number) {
   const user = await userRepository.findById(id);
   return user;
@@ -46,4 +53,5 @@ export default {
   create,
   validUser,
   findById,
+  findByIdOrFail,
 };
