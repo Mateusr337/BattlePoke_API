@@ -1,21 +1,46 @@
+import { pokemonLevels } from "./../../prisma/constants";
 import { prisma } from "../database.js";
 
 async function find(userId: number) {
-  const cards = await prisma.pokemon.findMany({});
+  const cards = await prisma.pokemon.findMany({
+    include: {
+      pokemonLevel: {},
+      PokemonTypePokemon: {
+        include: {
+          pokemonType: {},
+        },
+      },
+    },
+  });
+
   return cards;
 }
 
 async function findByUser(id: number) {
-  const pokemosAndTypes = await prisma.pokemonTypePokemon.findMany({
+  const cards = prisma.user.findUnique({
+    where: { id },
     include: {
-      pokemon: {},
-      pokemonType: {},
+      PokemonUser: {
+        include: {
+          pokemon: {
+            include: {
+              pokemonLevel: {},
+              PokemonTypePokemon: {
+                include: {
+                  pokemonType: {},
+                },
+              },
+            },
+          },
+        },
+      },
     },
   });
 
-  return pokemosAndTypes;
+  return cards;
 }
 
 export default {
   findByUser,
+  find,
 };
