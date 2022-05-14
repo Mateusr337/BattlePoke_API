@@ -44,6 +44,8 @@ export default async function seed() {
       },
     });
 
+    console.log(createdPokemon);
+
     const typesOfPokemon = pokemonsTypesTable.filter(
       (pokemonType) => pokemonType.name === pokemon.name
     );
@@ -53,12 +55,14 @@ export default async function seed() {
         where: { name: type.typeName },
       });
 
-      await prisma.pokemonTypePokemon.create({
+      const result = await prisma.pokemonTypePokemon.create({
         data: {
           pokemonId: createdPokemon.id,
           pokemonTypeId: typeId,
         },
       });
+
+      console.log(result);
     });
   });
 }

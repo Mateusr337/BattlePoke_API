@@ -97,7 +97,7 @@ model BattleUser {
 
 model Session {
   id    Int    @id @default(autoincrement())
-  token String
+  token String @unique
 
   @@map("sessions")
 }
