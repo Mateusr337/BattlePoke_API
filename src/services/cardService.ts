@@ -1,4 +1,4 @@
-import { PokemonUserInsertData } from "./../repositories/cardRepository";
+import { LevelsBattles, PokemonUserInsertData } from "./../repositories/cardRepository";
 import cardRepository from "../repositories/cardRepository.js";
 
 async function findByUser(userId: number) {
@@ -19,8 +19,14 @@ async function createPokemonUser(userId: number, pokemonsIds: Array<number>) {
   await cardRepository.createPokemonUser(pokemonsUsersData);
 }
 
+async function findPokemonsByLevel(level: LevelsBattles) {
+  const pokemons = await cardRepository.findPokemonsBattleByLevel(level);
+  return pokemons;
+}
+
 export default {
   findByUser,
   find,
   createPokemonUser,
+  findPokemonsByLevel,
 };

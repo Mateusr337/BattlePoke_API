@@ -36,6 +36,7 @@ model Pokemon {
 
   PokemonUser        PokemonUser[]
   PokemonTypePokemon PokemonTypePokemon[]
+  PokemonBattle      PokemonBattle[]
   @@map("pokemons")
 }
 
@@ -93,6 +94,15 @@ model BattleUser {
   battle   Battle @relation(fields: [battleId], references: [id])
 
   @@map("battlesUsers")
+}
+
+model PokemonBattle {
+  id        Int     @id @default(autoincrement())
+  level     Int
+  pokemonId Int
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+
+  @@map("pokemonsBattles")
 }
 
 model Session {

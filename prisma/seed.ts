@@ -5,6 +5,26 @@ import {
   pokemonTypes,
 } from "./constants.js";
 import { prisma } from "../src/database.js";
+import { Pokemon } from "@prisma/client";
+
+async function getPokemonByName(name: string) {
+  const pokemon = await prisma.pokemon.findUnique({ where: { name } });
+  return pokemon;
+}
+
+async function insertPokemonsBattles(
+  listOfPokemons: Array<Pokemon>,
+  numberOfLevel: number
+) {
+  const data = listOfPokemons.map((pokemon) => {
+    return {
+      level: numberOfLevel,
+      pokemonId: pokemon.id,
+    };
+  });
+
+  await prisma.pokemonBattle.createMany({ data });
+}
 
 export default async function seed() {
   pokemonTypes.map(async (type: string) => {
@@ -61,6 +81,32 @@ export default async function seed() {
       });
     });
   });
+
+  await prisma.$executeRaw`TRUNCATE TABLE "pokemonsBattles"`;
+
+  let pokemonsData = [
+    await getPokemonByName("charmander"),
+    await getPokemonByName("eevee"),
+    await getPokemonByName("caterpie"),
+  ];
+
+  await insertPokemonsBattles(pokemonsData, 1);
+
+  pokemonsData = [
+    await getPokemonByName("wartortle"),
+    await getPokemonByName("zubat"),
+    await getPokemonByName("bulbasaur"),
+  ];
+
+  await insertPokemonsBattles(pokemonsData, 2);
+
+  pokemonsData = [
+    await getPokemonByName("zubat"),
+    await getPokemonByName("ivysaur"),
+    await getPokemonByName("gyarados"),
+  ];
+
+  await insertPokemonsBattles(pokemonsData, 2);
 }
 
 seed()

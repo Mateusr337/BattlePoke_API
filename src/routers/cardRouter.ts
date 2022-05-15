@@ -7,6 +7,12 @@ const cardRouter = Router();
 cardRouter.get("/cards", ensureAuthenticatedMiddleware, cardController.find);
 cardRouter.get("/cards/user", ensureAuthenticatedMiddleware, cardController.findByUser);
 
+cardRouter.get(
+  "/cards/battles/:battleLevel",
+  ensureAuthenticatedMiddleware,
+  cardController.findPokemonsByLevel
+);
+
 cardRouter.post(
   "/cards",
   ensureAuthenticatedMiddleware,

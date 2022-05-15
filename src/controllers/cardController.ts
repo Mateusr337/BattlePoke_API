@@ -1,3 +1,4 @@
+import { LevelsBattles } from "./../repositories/cardRepository";
 import { User } from "@prisma/client";
 import { Request, Response } from "express";
 import cardService from "../services/cardService.js";
@@ -22,8 +23,16 @@ async function createPokemonUser(req: Request, res: Response) {
   res.sendStatus(201);
 }
 
+async function findPokemonsByLevel(req: Request, res: Response) {
+  const level = parseInt(req.params.battleLevel);
+
+  const pokemons = await cardService.findPokemonsByLevel(level as LevelsBattles);
+  res.send(pokemons);
+}
+
 export default {
   findByUser,
   createPokemonUser,
   find,
+  findPokemonsByLevel,
 };

@@ -2,6 +2,7 @@ import { PokemonUser } from "@prisma/client";
 import { prisma } from "../database.js";
 
 export type PokemonUserInsertData = Omit<PokemonUser, "id">;
+export type LevelsBattles = 1 | 2 | 3;
 
 async function find() {
   const cards = await prisma.pokemon.findMany({
@@ -46,8 +47,19 @@ async function createPokemonUser(data: Array<PokemonUserInsertData>) {
   await prisma.pokemonUser.createMany({ data });
 }
 
+async function findPokemonsBattleByLevel(level: LevelsBattles) {
+  const pokemons = await prisma.pokemonBattle.findMany({
+    where: { level },
+    include: {
+      pokemon: {},
+    },
+  });
+  return pokemons;
+}
+
 export default {
   findByUser,
   find,
   createPokemonUser,
+  findPokemonsBattleByLevel,
 };
