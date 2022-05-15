@@ -44,8 +44,6 @@ export default async function seed() {
       },
     });
 
-    console.log(createdPokemon);
-
     const typesOfPokemon = pokemonsTypesTable.filter(
       (pokemonType) => pokemonType.name === pokemon.name
     );
@@ -61,8 +59,6 @@ export default async function seed() {
           pokemonTypeId: typeId,
         },
       });
-
-      console.log(result);
     });
   });
 }

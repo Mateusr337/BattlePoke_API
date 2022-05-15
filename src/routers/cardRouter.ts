@@ -5,11 +5,12 @@ import { ensureAuthenticatedMiddleware } from "../middlewares/ensureAuthenticate
 const cardRouter = Router();
 
 cardRouter.get("/cards", ensureAuthenticatedMiddleware, cardController.find);
+cardRouter.get("/cards/user", ensureAuthenticatedMiddleware, cardController.findByUser);
+
 cardRouter.post(
   "/cards",
   ensureAuthenticatedMiddleware,
   cardController.createPokemonUser
 );
-cardRouter.get("/cards/user", ensureAuthenticatedMiddleware, cardController.findByUser);
 
 export default cardRouter;

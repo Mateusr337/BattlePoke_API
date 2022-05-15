@@ -5,7 +5,7 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "dotenv -e .env.test npx prisma migrate dev && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
+    "test": "dotenv -e .env.test npx prisma migrate dev && dotenv -e .env.test npx prisma db seed && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
     "dev": "nodemon src/server.ts",
     "build": "npx tsc --outDir dist && prisma generate",
     "start": "node dist/server.js"
