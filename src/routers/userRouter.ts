@@ -8,6 +8,7 @@ import userSchema from "../schemas/userSchema.js";
 const userRouter = Router();
 
 userRouter.post("/users", validateSchemaMiddleware(userSchema), userController.create);
+userRouter.get("/users", ensureAuthenticatedMiddleware, userController.findByIdOrFail);
 
 userRouter.post(
   "/users/validToken",

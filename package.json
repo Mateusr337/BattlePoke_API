@@ -10,6 +10,9 @@
     "build": "npx tsc --outDir dist && prisma generate",
     "start": "node dist/server.js"
   },
+  "prisma": {
+  "seed": "ts-node prisma/seed.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",

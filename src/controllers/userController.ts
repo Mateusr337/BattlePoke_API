@@ -16,6 +16,13 @@ async function valid(req: Request, res: Response) {
   res.send({ token });
 }
 
+async function findByIdOrFail(req: Request, res: Response) {
+  const { user } = res.locals;
+  if (!user) errorFunctions.notFoundError("user");
+
+  res.send(user);
+}
+
 async function responseToken(req: Request, res: Response) {
   res.sendStatus(200);
 }
@@ -24,4 +31,5 @@ export default {
   create,
   valid,
   responseToken,
+  findByIdOrFail,
 };
