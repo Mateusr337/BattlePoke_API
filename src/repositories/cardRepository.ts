@@ -51,7 +51,16 @@ async function findPokemonsBattleByLevel(level: LevelsBattles) {
   const pokemons = await prisma.pokemonBattle.findMany({
     where: { level },
     include: {
-      pokemon: {},
+      pokemon: {
+        include: {
+          PokemonTypePokemon: {
+            include: {
+              pokemonType: {},
+            },
+          },
+          pokemonLevel: {},
+        },
+      },
     },
   });
   return pokemons;

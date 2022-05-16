@@ -38,7 +38,6 @@ async function validEmailUser(email: string) {
 }
 
 async function findByIdOrFail(id: number) {
-  console.log("oi");
   const user = await userRepository.findById(id);
   if (!user) throw errorFunctions.notFoundError("user");
 

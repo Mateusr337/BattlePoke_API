@@ -106,7 +106,7 @@ export default async function seed() {
     await getPokemonByName("gyarados"),
   ];
 
-  await insertPokemonsBattles(pokemonsData, 2);
+  await insertPokemonsBattles(pokemonsData, 3);
 }
 
 seed()
