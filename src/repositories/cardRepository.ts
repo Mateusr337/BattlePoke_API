@@ -1,8 +1,34 @@
-import { PokemonUser } from "@prisma/client";
+import { Pokemon, PokemonLevel, PokemonType, PokemonUser } from "@prisma/client";
 import { prisma } from "../database.js";
 
 export type PokemonUserInsertData = Omit<PokemonUser, "id">;
 export type LevelsBattles = 1 | 2 | 3;
+
+interface FormattedPokemon {
+  id: number;
+  imageURL: string;
+  name: string;
+  pokemonLevel: PokemonLevel;
+  pokemonTypes: Array<PokemonType>;
+}
+
+function formatPokemons(pokemons: Array<any>): Array<FormattedPokemon> {
+  const formatted = pokemons.map((card: any) => ({
+    id: card.id as number,
+    imageURL: card.imageURL as string,
+    name: card.name as string,
+    attack: card.attack as number,
+    life: card.life as number,
+
+    pokemonLevel: card.pokemonLevel as PokemonLevel,
+
+    pokemonTypes: card.PokemonTypePokemon.map(
+      (types: any) => types.pokemonType
+    ) as Array<PokemonType>,
+  }));
+
+  return formatted;
+}
 
 async function find() {
   const cards = await prisma.pokemon.findMany({
@@ -16,11 +42,11 @@ async function find() {
     },
   });
 
-  return cards;
+  return formatPokemons(cards);
 }
 
 async function findByUser(id: number) {
-  const cards = prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: { id },
     include: {
       PokemonUser: {
@@ -40,7 +66,11 @@ async function findByUser(id: number) {
     },
   });
 
-  return cards;
+  const pokemons = user.PokemonUser.map(
+    (pokemonUser: PokemonUser & { pokemon: Pokemon }) => pokemonUser.pokemon
+  );
+
+  return formatPokemons(pokemons);
 }
 
 async function createPokemonUser(data: Array<PokemonUserInsertData>) {
@@ -48,7 +78,7 @@ async function createPokemonUser(data: Array<PokemonUserInsertData>) {
 }
 
 async function findPokemonsBattleByLevel(level: LevelsBattles) {
-  const pokemons = await prisma.pokemonBattle.findMany({
+  const cards = await prisma.pokemonBattle.findMany({
     where: { level },
     include: {
       pokemon: {
@@ -63,7 +93,7 @@ async function findPokemonsBattleByLevel(level: LevelsBattles) {
       },
     },
   });
-  return pokemons;
+  return formatPokemons(cards);
 }
 
 export default {
