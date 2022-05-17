@@ -170,7 +170,7 @@ export const pokemonsTypesTable = [
     typeName: "poisonous",
   },
   {
-    name: "eeve",
+    name: "eevee",
     typeName: "normal",
   },
   {
