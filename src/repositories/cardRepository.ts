@@ -93,7 +93,8 @@ async function findPokemonsBattleByLevel(level: LevelsBattles) {
       },
     },
   });
-  return formatPokemons(cards);
+  const pokemons = cards.map((card) => card.pokemon);
+  return formatPokemons(pokemons);
 }
 
 export default {
