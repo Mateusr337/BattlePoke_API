@@ -19,8 +19,8 @@ model User {
   imageURL String
 
   PokemonUser PokemonUser[]
-  Battle      Battle[]
   BattleUser  BattleUser[]
+
 
   @@map("users")
 }
@@ -37,6 +37,7 @@ model Pokemon {
   PokemonUser        PokemonUser[]
   PokemonTypePokemon PokemonTypePokemon[]
   PokemonBattle      PokemonBattle[]
+  BattleUserPokemon  BattleUserPokemon[]
   @@map("pokemons")
 }
 
@@ -78,22 +79,34 @@ model PokemonTypePokemon {
 }
 
 model Battle {
-  id     Int  @id @default(autoincrement())
-  winner Int
-  user   User @relation(fields: [winner], references: [id])
+  id       Int      @id @default(autoincrement())
+  finished Boolean?
 
   BattleUser BattleUser[]
   @@map("battles")
 }
 
 model BattleUser {
-  id       Int    @id @default(autoincrement())
+  id       Int      @id @default(autoincrement())
   userId   Int
-  user     User   @relation(fields: [userId], references: [id])
+  user     User     @relation(fields: [userId], references: [id])
+  winner   Boolean?
   battleId Int
-  battle   Battle @relation(fields: [battleId], references: [id])
+  battle   Battle   @relation(fields: [battleId], references: [id])
 
+  BattleUserPokemon BattleUserPokemon[]
   @@map("battlesUsers")
+}
+
+model BattleUserPokemon {
+  id           Int        @id @default(autoincrement())
+  battleUserId Int
+  battleUser   BattleUser @relation(fields: [battleUserId], references: [id])
+  pokemonId    Int
+  pokemon      Pokemon    @relation(fields: [pokemonId], references: [id])
+
+
+  @@map("battlesUsersPokemons")
 }
 
 model PokemonBattle {
