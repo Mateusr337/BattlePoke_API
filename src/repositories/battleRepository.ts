@@ -1,33 +1,26 @@
 import { prisma } from "../database.js";
 
-async function create() {
+export type BattleLevel = 1 | 2 | 3;
+
+async function create(userId: number, Level: BattleLevel) {
   const battle = await prisma.battle.create({
     data: {
-      finished: false,
+      userId,
+      Level,
+      finish: false,
+      wins: null,
     },
   });
 
   return battle;
 }
 
-async function finish(winnerId: number) {
-  const battles = await prisma.battle.findMany({
-    where: { finished: false },
-  });
-  const battle = battles[battles.length - 1];
-
-  await prisma.battle.update({
-    where: { id: battle.id },
-    data: { finished: true },
-  });
-
-  await prisma.battleUser.updateMany({
-    where: { AND: [{ battleId: battle.id }, { userId: winnerId }] },
-    data: {},
-  });
+async function findById(id: number) {
+  const battle = await prisma.battle.findUnique({ where: { id } });
+  return battle;
 }
 
 export default {
   create,
-  finish,
+  findById,
 };

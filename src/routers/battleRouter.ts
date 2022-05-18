@@ -13,4 +13,10 @@ battleRouter.post(
   battleController.create
 );
 
+battleRouter.get(
+  "/battles/:id",
+  ensureAuthenticatedMiddleware,
+  battleController.findById
+);
+
 export default battleRouter;

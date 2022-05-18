@@ -23,12 +23,12 @@ async function insertPokemonsBattles(
     };
   });
 
-  await prisma.pokemonBattle.createMany({ data });
+  await prisma.pokemonLevel.createMany({ data });
 }
 
 export default async function seed() {
   pokemonTypes.map(async (type: string) => {
-    await prisma.pokemonType.upsert({
+    await prisma.type.upsert({
       where: { name: type },
       update: {},
       create: { name: type },
@@ -36,7 +36,7 @@ export default async function seed() {
   });
 
   pokemonLevels.map(async (level) => {
-    await prisma.pokemonLevel.upsert({
+    await prisma.category.upsert({
       where: { name: level.name },
       update: {},
       create: {
@@ -46,10 +46,10 @@ export default async function seed() {
     });
   });
 
-  await prisma.$executeRaw`TRUNCATE TABLE "pokemonsTypesPokemons"`;
+  await prisma.$executeRaw`TRUNCATE TABLE "pokemonsTypes"`;
 
   pokemons.map(async (pokemon) => {
-    const { id } = await prisma.pokemonLevel.findUnique({
+    const { id } = await prisma.category.findUnique({
       where: { number: `${pokemon.levelNumber}` },
     });
 
@@ -60,7 +60,7 @@ export default async function seed() {
       update: {},
       create: {
         ...pokemon,
-        pokemonLevelId: id,
+        categoryId: id,
       },
     });
 
@@ -69,20 +69,20 @@ export default async function seed() {
     );
 
     typesOfPokemon.map(async (type) => {
-      const { id: typeId } = await prisma.pokemonType.findUnique({
+      const { id: typeId } = await prisma.type.findUnique({
         where: { name: type.typeName },
       });
 
-      const result = await prisma.pokemonTypePokemon.create({
+      const result = await prisma.pokemonType.create({
         data: {
           pokemonId: createdPokemon.id,
-          pokemonTypeId: typeId,
+          typeId: typeId,
         },
       });
     });
   });
 
-  await prisma.$executeRaw`TRUNCATE TABLE "pokemonsBattles"`;
+  await prisma.$executeRaw`TRUNCATE TABLE "pokemonsLevels"`;
 
   let pokemonsData = [
     await getPokemonByName("charmander"),

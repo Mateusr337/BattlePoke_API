@@ -1,4 +1,4 @@
-import { Pokemon, PokemonLevel, PokemonType, PokemonUser } from "@prisma/client";
+import { Category, Pokemon, PokemonUser, Type } from "@prisma/client";
 import { prisma } from "../database.js";
 
 export type PokemonUserInsertData = Omit<PokemonUser, "id">;
@@ -8,8 +8,8 @@ interface FormattedPokemon {
   id: number;
   imageURL: string;
   name: string;
-  pokemonLevel: PokemonLevel;
-  pokemonTypes: Array<PokemonType>;
+  category: Category;
+  types: Array<Type>;
 }
 
 function formatPokemons(pokemons: Array<any>): Array<FormattedPokemon> {
@@ -20,11 +20,11 @@ function formatPokemons(pokemons: Array<any>): Array<FormattedPokemon> {
     attack: card.attack as number,
     life: card.life as number,
 
-    pokemonLevel: card.pokemonLevel as PokemonLevel,
+    category: card.category as Category,
 
-    pokemonTypes: card.PokemonTypePokemon.map(
-      (types: any) => types.pokemonType
-    ) as Array<PokemonType>,
+    types: card.pokemonType.map(
+      (pokemonsTypes: any) => pokemonsTypes.type
+    ) as Array<Type>,
   }));
 
   return formatted;
@@ -33,16 +33,32 @@ function formatPokemons(pokemons: Array<any>): Array<FormattedPokemon> {
 async function find() {
   const cards = await prisma.pokemon.findMany({
     include: {
-      pokemonLevel: {},
-      PokemonTypePokemon: {
+      category: {},
+      pokemonType: {
         include: {
-          pokemonType: {},
+          type: {},
         },
       },
     },
   });
 
   return formatPokemons(cards);
+}
+
+async function findById(id: number) {
+  const cards = await prisma.pokemon.findUnique({
+    where: { id },
+    include: {
+      category: {},
+      pokemonType: {
+        include: {
+          type: {},
+        },
+      },
+    },
+  });
+
+  return formatPokemons([cards])[0];
 }
 
 async function findByUser(id: number) {
@@ -53,10 +69,10 @@ async function findByUser(id: number) {
         include: {
           pokemon: {
             include: {
-              pokemonLevel: {},
-              PokemonTypePokemon: {
+              category: {},
+              pokemonType: {
                 include: {
-                  pokemonType: {},
+                  type: {},
                 },
               },
             },
@@ -78,17 +94,17 @@ async function createPokemonUser(data: Array<PokemonUserInsertData>) {
 }
 
 async function findPokemonsBattleByLevel(level: LevelsBattles) {
-  const cards = await prisma.pokemonBattle.findMany({
+  const cards = await prisma.pokemonLevel.findMany({
     where: { level },
     include: {
       pokemon: {
         include: {
-          PokemonTypePokemon: {
+          pokemonType: {
             include: {
-              pokemonType: {},
+              type: {},
             },
           },
-          pokemonLevel: {},
+          category: {},
         },
       },
     },
@@ -102,4 +118,5 @@ export default {
   find,
   createPokemonUser,
   findPokemonsBattleByLevel,
+  findById,
 };

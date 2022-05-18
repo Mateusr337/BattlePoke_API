@@ -5,7 +5,11 @@ import { ensureAuthenticatedMiddleware } from "../middlewares/ensureAuthenticate
 const cardRouter = Router();
 
 cardRouter.get("/cards", ensureAuthenticatedMiddleware, cardController.find);
-cardRouter.get("/cards/user", ensureAuthenticatedMiddleware, cardController.findByUser);
+cardRouter.get(
+  "/cards/user",
+  ensureAuthenticatedMiddleware,
+  cardController.findByUser
+);
 
 cardRouter.get(
   "/cards/battles/:battleLevel",
@@ -17,6 +21,12 @@ cardRouter.post(
   "/cards",
   ensureAuthenticatedMiddleware,
   cardController.createPokemonUser
+);
+
+cardRouter.get(
+  "/cards/users/battles/:battleId",
+  ensureAuthenticatedMiddleware,
+  cardController.findByUserAndBattle
 );
 
 export default cardRouter;

@@ -1,17 +1,8 @@
-import joi, { number } from "joi";
+import joi from "joi";
 
 const battleSchema = joi.object({
-  user1: joi
-    .object({
-      id: joi.number().integer().required(),
-      pokemonIds: joi.array().items(joi.number().integer()).required(),
-    })
-    .required(),
-
-  user2: joi.object({
-    id: joi.number().integer().required(),
-    pokemonIds: joi.array().items(joi.number().integer()).required(),
-  }),
+  level: joi.number().integer().required(),
+  pokemonsIds: joi.array().items(joi.number().integer()).required(),
 });
 
 export default battleSchema;

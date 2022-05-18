@@ -1,29 +1,25 @@
-import { BattleUser } from "@prisma/client";
-import battleRepository from "../repositories/battleRepository.js";
-import battleUserPokemonsRepository from "../repositories/battleUserPokemonsRepository.js";
-import battleUsersRepository from "../repositories/battleUsersRepository.js";
+import battleRepository, {
+  BattleLevel,
+} from "../repositories/battleRepository.js";
+import battlePokemonRepository from "../repositories/battlePokemonRepository.js";
 
-interface userCreateBattle {
-  id: number;
-  pokemonIds: Array<number>;
+async function create(
+  level: BattleLevel,
+  userId: number,
+  pokemonsIds: Array<number>
+) {
+  const battle = await battleRepository.create(userId, level);
+  await battlePokemonRepository.create(pokemonsIds, battle.id);
+
+  return battle;
 }
 
-async function create(users: Array<userCreateBattle>) {
-  const battle = await battleRepository.create();
-
-  users.map(async (user: userCreateBattle) => {
-    if (user === undefined) return;
-
-    const battleUser = await battleUsersRepository.create({
-      userId: user.id,
-      winner: false,
-      battleId: battle.id,
-    });
-
-    await battleUserPokemonsRepository.create(user.pokemonIds, battleUser.id);
-  });
+async function findById(id: number) {
+  const battle = await battleRepository.findById(id);
+  return battle;
 }
 
 export default {
   create,
+  findById,
 };
