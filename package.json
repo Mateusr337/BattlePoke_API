@@ -7,8 +7,8 @@
   "scripts": {
     "test": "dotenv -e .env.test npx prisma migrate dev && dotenv -e .env.test npx prisma db seed && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
     "dev": "nodemon src/server.ts",
-    "prepare": "npx prisma pull",
-    "build": "npx tsc --outDir dist && npx prisma generate",
+    "prepare": "prisma db pull",
+    "build": "npx tsc --outDir dist && prisma generate",
     "start": "node dist/src/server.js"
   },
   "prisma": {
