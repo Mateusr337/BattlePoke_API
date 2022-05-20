@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-=======
 import { LevelsBattles } from "./../repositories/cardRepository";
 import { User } from "@prisma/client";
->>>>>>> 174052bdf463664e1bf0c4f636dccf7e213aeeec
 import { Request, Response } from "express";
 import cardService from "../services/cardService.js";
 
