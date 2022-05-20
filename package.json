@@ -7,12 +7,14 @@
   "scripts": {
     "test": "dotenv -e .env.test npx prisma migrate dev && dotenv -e .env.test npx prisma db seed && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
     "dev": "nodemon src/server.ts",
-    "prepare": "",
+    "prepare": "prisma migrate",
     "build": "npx tsc --outDir dist && prisma generate",
     "start": "node dist/src/server.js"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "seed": "ts-node prisma/seed.ts",
+    "seed:heroku": "node dist/prisma/seed.js"
+
   },
   "keywords": [],
   "author": "",
