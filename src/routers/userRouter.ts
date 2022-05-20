@@ -7,8 +7,16 @@ import userSchema from "../schemas/userSchema.js";
 
 const userRouter = Router();
 
-userRouter.post("/users", validateSchemaMiddleware(userSchema), userController.create);
-userRouter.get("/users", ensureAuthenticatedMiddleware, userController.findByIdOrFail);
+userRouter.post(
+  "/users",
+  validateSchemaMiddleware(userSchema),
+  userController.create
+);
+userRouter.get(
+  "/users",
+  ensureAuthenticatedMiddleware,
+  userController.findByIdOrFail
+);
 
 userRouter.post(
   "/users/validToken",
@@ -20,6 +28,12 @@ userRouter.post(
   "/users/login",
   validateSchemaMiddleware(authSchema),
   userController.valid
+);
+
+userRouter.patch(
+  "/users/upLevels",
+  ensureAuthenticatedMiddleware,
+  userController.updateLevel
 );
 
 export default userRouter;

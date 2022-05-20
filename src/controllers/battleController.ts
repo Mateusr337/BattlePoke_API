@@ -16,7 +16,24 @@ async function findById(req: Request, res: Response) {
   res.send(battle);
 }
 
+async function findByUser(req: Request, res: Response) {
+  const { user } = res.locals;
+
+  const battles = await battleService.findByUser(user.id);
+  res.send(battles);
+}
+
+async function update(req: Request, res: Response) {
+  const data = req.body;
+  const { id } = req.body;
+
+  await battleService.update(id, data);
+  res.sendStatus(204);
+}
+
 export default {
   create,
   findById,
+  findByUser,
+  update,
 };

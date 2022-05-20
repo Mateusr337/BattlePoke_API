@@ -1,3 +1,4 @@
+import { UpdateBattle } from "./../repositories/battleRepository";
 import battleRepository, {
   BattleLevel,
 } from "../repositories/battleRepository.js";
@@ -19,7 +20,18 @@ async function findById(id: number) {
   return battle;
 }
 
+async function findByUser(userId: number) {
+  const battles = await battleRepository.findByUser(userId);
+  return battles;
+}
+
+async function update(id: number, data: UpdateBattle) {
+  await battleRepository.update(data, id);
+}
+
 export default {
   create,
   findById,
+  findByUser,
+  update,
 };
