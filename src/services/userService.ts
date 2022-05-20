@@ -1,10 +1,15 @@
 import jwt from "jsonwebtoken";
 import encryptFunctions from "../utils/encryptFunction.js";
 import errorFunctions from "../utils/errorFunctions.js";
-import userRepository, { InsertUserData } from "./../repositories/userRepository.js";
+import userRepository, {
+  InsertUserData,
+} from "./../repositories/userRepository.js";
 
 type insertPartialUserData = Omit<InsertUserData, "level">;
-type authUserData = Omit<InsertUserData, "level" | "imageURL" | "level" | "name">;
+type authUserData = Omit<
+  InsertUserData,
+  "level" | "imageURL" | "level" | "name"
+>;
 
 async function create(data: insertPartialUserData) {
   const user = await userRepository.findByEmail(data.email);
@@ -24,7 +29,11 @@ async function validUser(data: authUserData) {
   await encryptFunctions.compareEncrypted(data.password, user.password);
 
   const expiration = { expiresIn: 60 * 60 * 24 * 30 };
-  const token: string = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, expiration);
+  const token: string = jwt.sign(
+    { userId: user.id },
+    process.env.JWT_SECRET,
+    expiration
+  );
 
   await userRepository.sessionInsert(token);
   return token;
@@ -49,9 +58,17 @@ async function findById(id: number) {
   return user;
 }
 
+async function updateLevel(userId: number, newLevel: string) {
+  if (parseInt(newLevel) <= 0 || parseInt(newLevel) > 4) {
+    throw errorFunctions.badRequestError("level");
+  }
+  await userRepository.updateLevel(userId, newLevel);
+}
+
 export default {
   create,
   validUser,
   findById,
   findByIdOrFail,
+  updateLevel,
 };

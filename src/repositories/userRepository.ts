@@ -33,10 +33,18 @@ async function sessionFind(token: string) {
   return session;
 }
 
+async function updateLevel(userId: number, newLevel: string) {
+  await prisma.user.update({
+    where: { id: userId },
+    data: { level: newLevel },
+  });
+}
+
 export default {
   create,
   findByEmail,
   sessionInsert,
   sessionFind,
   findById,
+  updateLevel,
 };
