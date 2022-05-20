@@ -35,7 +35,7 @@ export const pokemons = [
       "https://assets.pokemon.com/assets/cms2/img/watch-pokemon-tv/seasons/season01/season01_ep10_ss01.jpg",
   },
   {
-    name: "eeve",
+    name: "eevee",
     attack: 50,
     life: 800,
     levelNumber: 1,
@@ -170,7 +170,7 @@ export const pokemonsTypesTable = [
     typeName: "poisonous",
   },
   {
-    name: "eeve",
+    name: "eevee",
     typeName: "normal",
   },
   {

@@ -27,9 +27,18 @@ async function responseToken(req: Request, res: Response) {
   res.sendStatus(200);
 }
 
+async function updateLevel(req: Request, res: Response) {
+  const { level } = req.body;
+  const { user } = res.locals;
+
+  await userService.updateLevel(user.id, level);
+  res.sendStatus(204);
+}
+
 export default {
   create,
   valid,
   responseToken,
   findByIdOrFail,
+  updateLevel,
 };

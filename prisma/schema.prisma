@@ -19,23 +19,25 @@ model User {
   imageURL String
 
   PokemonUser PokemonUser[]
-  Battle      Battle[]
-  BattleUser  BattleUser[]
 
+
+  Battle Battle[]
   @@map("users")
 }
 
 model Pokemon {
-  id             Int          @id @default(autoincrement())
-  name           String       @unique
-  pokemonLevelId Int
-  pokemonLevel   PokemonLevel @relation(fields: [pokemonLevelId], references: [id])
-  life           Int
-  attack         Int
-  imageURL       String
+  id         Int      @id @default(autoincrement())
+  name       String   @unique
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id])
+  life       Int
+  attack     Int
+  imageURL   String
 
-  PokemonUser        PokemonUser[]
-  PokemonTypePokemon PokemonTypePokemon[]
+  pokemonUser   PokemonUser[]
+  battlePokemon BattlePokemon[]
+  pokemonLevel  PokemonLevel[]
+  pokemonType   PokemonType[]
   @@map("pokemons")
 }
 
@@ -49,50 +51,63 @@ model PokemonUser {
   @@map("pokemonsUsers")
 }
 
-model PokemonLevel {
+model Category {
   id     Int    @id @default(autoincrement())
   name   String @unique
   number String @unique
 
-  Pokemon Pokemon[]
-  @@map("pokemonsLevels")
+  pokemon Pokemon[]
+  @@map("categories")
 }
 
-model PokemonType {
+model Type {
   id   Int    @id @default(autoincrement())
   name String @unique
 
-  PokemonTypePokemon PokemonTypePokemon[]
+  pokemonType PokemonType[]
+  @@map("types")
+}
+
+model PokemonType {
+  id        Int     @id @default(autoincrement())
+  typeId    Int
+  type      Type    @relation(fields: [typeId], references: [id])
+  pokemonId Int
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+
   @@map("pokemonsTypes")
 }
 
-model PokemonTypePokemon {
-  id            Int         @id @default(autoincrement())
-  pokemonTypeId Int
-  pokemonType   PokemonType @relation(fields: [pokemonTypeId], references: [id])
-  pokemonId     Int
-  pokemon       Pokemon     @relation(fields: [pokemonId], references: [id])
-
-  @@map("pokemonsTypesPokemons")
-}
-
 model Battle {
-  id     Int  @id @default(autoincrement())
-  winner Int
-  user   User @relation(fields: [winner], references: [id])
+  id     Int      @id @default(autoincrement())
+  userId Int
+  user   User     @relation(fields: [userId], references: [id])
+  Level  Int
+  finish Boolean?
+  wins   Boolean?
 
-  BattleUser BattleUser[]
+  battlePokemon BattlePokemon[]
   @@map("battles")
 }
 
-model BattleUser {
-  id       Int    @id @default(autoincrement())
-  userId   Int
-  user     User   @relation(fields: [userId], references: [id])
-  battleId Int
-  battle   Battle @relation(fields: [battleId], references: [id])
+model BattlePokemon {
+  id        Int     @id @default(autoincrement())
+  battleId  Int
+  battle    Battle  @relation(fields: [battleId], references: [id])
+  pokemonId Int
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
 
-  @@map("battlesUsers")
+
+  @@map("battlesUsersPokemons")
+}
+
+model PokemonLevel {
+  id        Int     @id @default(autoincrement())
+  level     Int
+  pokemonId Int
+  pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
+
+  @@map("pokemonsLevels")
 }
 
 model Session {
