@@ -4,7 +4,6 @@ import {
 } from "./../repositories/cardRepository";
 import cardRepository from "../repositories/cardRepository.js";
 import battlePokemonRepository from "../repositories/battlePokemonRepository.js";
-import { BattlePokemon } from "@prisma/client";
 
 async function findByUser(userId: number) {
   const cards = await cardRepository.findByUser(userId);
@@ -31,7 +30,7 @@ async function findPokemonsByLevel(level: LevelsBattles) {
   return pokemons;
 }
 
-async function findByUserAndBattle(userId: number, battleId: number) {
+async function findByBattleId(battleId: number) {
   const battlesPokemons = await battlePokemonRepository.findByBattleId(
     battleId
   );
@@ -51,5 +50,5 @@ export default {
   find,
   createPokemonUser,
   findPokemonsByLevel,
-  findByUserAndBattle,
+  findByBattleId,
 };

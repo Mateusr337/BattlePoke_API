@@ -27,7 +27,7 @@ cardRouter.post(
 cardRouter.get(
   "/cards/users/battles/:battleId",
   ensureAuthenticatedMiddleware,
-  cardController.findByUserAndBattle
+  cardController.findByBattleId
 );
 
 export default cardRouter;
