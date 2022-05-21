@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/14</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -106,33 +106,33 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -144,34 +144,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Request, Response } from "express";
 import battleService from "../services/battleService.js";
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >create(</span>req: Request, res: Response) {
-  const { pokemonsIds, level } = <span class="cstat-no" title="statement not covered" >req.body;</span>
-  const { user } = <span class="cstat-no" title="statement not covered" >res.locals;</span>
+async function create(req: Request, res: Response) {
+  const { pokemonsIds, level } = req.body;
+  const { user } = res.locals;
 &nbsp;
-  const battle = <span class="cstat-no" title="statement not covered" >await battleService.create(level, user.id, pokemonsIds);</span>
-<span class="cstat-no" title="statement not covered" >  res.status(201).send(battle);</span>
+  const battle = await battleService.create(level, user.id, pokemonsIds);
+  res.status(201).send(battle);
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >findById(</span>req: Request, res: Response) {
-  const id = <span class="cstat-no" title="statement not covered" >parseInt(req.params.id);</span>
+async function findById(req: Request, res: Response) {
+  const id = parseInt(req.params.id);
 &nbsp;
-  const battle = <span class="cstat-no" title="statement not covered" >await battleService.findById(id);</span>
-<span class="cstat-no" title="statement not covered" >  res.send(battle);</span>
+  const battle = await battleService.findById(id);
+  res.send(battle);
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >findByUser(</span>req: Request, res: Response) {
-  const { user } = <span class="cstat-no" title="statement not covered" >res.locals;</span>
+async function findByUser(req: Request, res: Response) {
+  const { user } = res.locals;
 &nbsp;
-  const battles = <span class="cstat-no" title="statement not covered" >await battleService.findByUser(user.id);</span>
-<span class="cstat-no" title="statement not covered" >  res.send(battles);</span>
+  const battles = await battleService.findByUser(user.id);
+  res.send(battles);
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >update(</span>req: Request, res: Response) {
-  const data = <span class="cstat-no" title="statement not covered" >req.body;</span>
-  const { id } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+async function update(req: Request, res: Response) {
+  const data = req.body;
+  const { id } = req.body;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  await battleService.update(id, data);</span>
-<span class="cstat-no" title="statement not covered" >  res.sendStatus(204);</span>
+  await battleService.update(id, data);
+  res.sendStatus(204);
 }
 &nbsp;
 export default {
@@ -187,7 +187,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sat May 21 2022 11:17:18 GMT-0300 (Brasilia Standard Time)
+                at Sat May 21 2022 12:09:16 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

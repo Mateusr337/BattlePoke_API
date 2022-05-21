@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>8/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -111,24 +111,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -143,29 +143,29 @@ import battleRepository, {
 } from "../repositories/battleRepository.js";
 import battlePokemonRepository from "../repositories/battlePokemonRepository.js";
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >create(</span>
+async function create(
   level: BattleLevel,
   userId: number,
   pokemonsIds: Array&lt;number&gt;
 ) {
-  const battle = <span class="cstat-no" title="statement not covered" >await battleRepository.create(userId, level);</span>
-<span class="cstat-no" title="statement not covered" >  await battlePokemonRepository.create(pokemonsIds, battle.id);</span>
+  const battle = await battleRepository.create(userId, level);
+  await battlePokemonRepository.create(pokemonsIds, battle.id);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return battle;</span>
+  return battle;
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >findById(</span>id: number) {
-  const battle = <span class="cstat-no" title="statement not covered" >await battleRepository.findById(id);</span>
-<span class="cstat-no" title="statement not covered" >  return battle;</span>
+async function findById(id: number) {
+  const battle = await battleRepository.findById(id);
+  return battle;
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >findByUser(</span>userId: number) {
-  const battles = <span class="cstat-no" title="statement not covered" >await battleRepository.findByUser(userId);</span>
-<span class="cstat-no" title="statement not covered" >  return battles;</span>
+async function findByUser(userId: number) {
+  const battles = await battleRepository.findByUser(userId);
+  return battles;
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >update(</span>id: number, data: UpdateBattle) {
-<span class="cstat-no" title="statement not covered" >  await battleRepository.update(data, id);</span>
+async function update(id: number, data: UpdateBattle) {
+  await battleRepository.update(data, id);
 }
 &nbsp;
 export default {
@@ -181,7 +181,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sat May 21 2022 11:17:18 GMT-0300 (Brasilia Standard Time)
+                at Sat May 21 2022 12:09:16 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

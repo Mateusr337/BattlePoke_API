@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -118,7 +118,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -127,24 +127,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -162,8 +162,8 @@ export interface UpdateBattle {
   wins: boolean;
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >create(</span>userId: number, Level: BattleLevel) {
-  const battle = <span class="cstat-no" title="statement not covered" >await prisma.battle.create({</span>
+async function create(userId: number, Level: BattleLevel) {
+  const battle = await prisma.battle.create({
     data: {
       userId,
       Level,
@@ -172,24 +172,24 @@ async function <span class="fstat-no" title="function not covered" >create(</spa
     },
   });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return battle;</span>
+  return battle;
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >update(</span>data: UpdateBattle, id: number) {
-<span class="cstat-no" title="statement not covered" >  await prisma.battle.update({</span>
+async function update(data: UpdateBattle, id: number) {
+  await prisma.battle.update({
     where: { id },
     data,
   });
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >findById(</span>id: number) {
-  const battle = <span class="cstat-no" title="statement not covered" >await prisma.battle.findUnique({ where: { id } });</span>
-<span class="cstat-no" title="statement not covered" >  return battle;</span>
+async function findById(id: number) {
+  const battle = await prisma.battle.findUnique({ where: { id } });
+  return battle;
 }
 &nbsp;
-async function <span class="fstat-no" title="function not covered" >findByUser(</span>userId: number) {
-  const battles = <span class="cstat-no" title="statement not covered" >await prisma.battle.findMany({ where: { userId } });</span>
-<span class="cstat-no" title="statement not covered" >  return battles;</span>
+async function findByUser(userId: number) {
+  const battles = await prisma.battle.findMany({ where: { userId } });
+  return battles;
 }
 &nbsp;
 export default {
@@ -205,7 +205,7 @@ export default {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sat May 21 2022 11:17:18 GMT-0300 (Brasilia Standard Time)
+                at Sat May 21 2022 12:09:16 GMT-0300 (Brasilia Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>

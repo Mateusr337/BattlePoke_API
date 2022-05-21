@@ -1,7 +1,9 @@
+import { Pokemon } from "@prisma/client";
 import supertest from "supertest";
 import app from "../../src/app.js";
 import { prisma } from "../../src/database.js";
 import battleFactory from "../factories/battleFactory.js";
+import pokemonsFactory from "../factories/pokemonsFactory.js";
 import userFactory from "../factories/userFactory.js";
 
 afterEach(async () => {
@@ -81,9 +83,29 @@ describe("users", () => {
       expect(res.status).toEqual(200);
     });
   });
+
+  describe("PACTH /users/upLevels", () => {
+    beforeEach(async () => {
+      await truncate("users");
+    });
+
+    it("should answer with status code 204", async () => {
+      const user = await userFactory.createLogin();
+
+      const res = await agent
+        .patch(`/users/upLevels`)
+        .send({ level: user.level + 1 })
+        .set(user.authorization);
+
+      const userUpLevel = await prisma.user.findFirst();
+
+      expect(res.status).toEqual(204);
+      expect(userUpLevel.level).toEqual(user.level + 1);
+    });
+  });
 });
 
-describe("cards", () => {
+describe("pokemons", () => {
   describe("GET /cards", () => {
     beforeEach(async () => {
       await truncate("users");
@@ -150,6 +172,10 @@ describe("cards", () => {
   });
 
   describe("GET /cards/users/battles/:battleId", () => {
+    beforeEach(async () => {
+      await truncate("battles");
+    });
+
     it("should answer with list of cards", async () => {
       const user = await userFactory.createLogin();
       const battle = await battleFactory.createBattle(user.id);
@@ -160,6 +186,76 @@ describe("cards", () => {
 
       expect(res.status).toEqual(200);
       expect(res.body.length).toEqual(3);
+    });
+  });
+});
+
+describe("battles", () => {
+  beforeEach(async () => {
+    await truncate("battles");
+  });
+
+  describe("POST /battles", () => {
+    it("should answer with status code 201", async () => {
+      const user = await userFactory.createLogin();
+      const level = battleFactory.randomLevel();
+      const pokemons = await pokemonsFactory.findPokemons(3);
+
+      const pokemonsIds = pokemons.map((pokemon: Pokemon) => pokemon.id);
+
+      const res = await agent
+        .post("/battles")
+        .set(user.authorization)
+        .send({ level, pokemonsIds });
+
+      const battle = await prisma.battle.findFirst();
+
+      expect(res.status).toEqual(201);
+      expect(battle).not.toBeNull();
+    });
+  });
+
+  describe("GET /battles/:id", () => {
+    it("should answer with not null", async () => {
+      const user = await userFactory.createLogin();
+      const battle = await battleFactory.createBattle(user.id);
+
+      const res = await agent
+        .get(`/battles/${battle.id}`)
+        .set(user.authorization);
+
+      expect(res.body).not.toBeNull();
+    });
+  });
+
+  describe("GET /storyBattles/users", () => {
+    it("should answer with array.length more than 0", async () => {
+      const user = await userFactory.createLogin();
+      await battleFactory.createBattle(user.id);
+
+      const res = await agent
+        .get("/storyBattles/users")
+        .set(user.authorization);
+
+      expect(res.body.length).toBeGreaterThan(0);
+    });
+  });
+
+  describe("PATCH /battles", () => {
+    it("should answer with array.length more than 0", async () => {
+      const user = await userFactory.createLogin();
+      const battle = await battleFactory.createBattle(user.id);
+
+      const res = await agent
+        .patch("/battles")
+        .set(user.authorization)
+        .send({ id: battle.id, finish: true, wins: false });
+
+      const battleUp = await prisma.battle.findFirst();
+
+      expect(res.status).toEqual(204);
+      expect(battleUp.finish).toEqual(true);
+      expect(battleUp.wins).toEqual(false);
     });
   });
 });
