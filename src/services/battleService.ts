@@ -1,8 +1,10 @@
-import { UpdateBattle } from "./../repositories/battleRepository";
+import { UpdateBattle } from "./../repositories/battleRepository.js";
 import battleRepository, {
   BattleLevel,
 } from "../repositories/battleRepository.js";
 import battlePokemonRepository from "../repositories/battlePokemonRepository.js";
+import userService from "./userService.js";
+import userRepository from "../repositories/userRepository.js";
 
 async function create(
   level: BattleLevel,
@@ -26,7 +28,12 @@ async function findByUser(userId: number) {
 }
 
 async function update(id: number, data: UpdateBattle) {
-  await battleRepository.update(data, id);
+  const battle = await battleRepository.update(data, id);
+
+  if (data.wins) {
+    const user = await userService.findById(battle.userId);
+    await userRepository.update({ points: user.points + 3 }, battle.userId);
+  }
 }
 
 export default {

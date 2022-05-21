@@ -37,10 +37,18 @@ async function findByBattleId(req: Request, res: Response) {
   res.send(cards);
 }
 
+async function findByName(req: Request, res: Response) {
+  const { name } = req.params;
+
+  const card = await cardService.findByName(name);
+  res.send(card);
+}
+
 export default {
   findByUser,
   createPokemonUser,
   find,
   findPokemonsByLevel,
   findByBattleId,
+  findByName,
 };

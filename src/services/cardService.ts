@@ -45,10 +45,16 @@ async function findByBattleId(battleId: number) {
   return cards;
 }
 
+async function findByName(name: string) {
+  const pokemon = await cardRepository.findByName(name);
+  return pokemon;
+}
+
 export default {
   findByUser,
   find,
   createPokemonUser,
   findPokemonsByLevel,
   findByBattleId,
+  findByName,
 };

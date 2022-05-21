@@ -18,6 +18,7 @@ function formatPokemons(pokemons: Array<any>): Array<FormattedPokemon> {
     imageURL: card.imageURL as string,
     name: card.name as string,
     attack: card.attack as number,
+    evolution: card.evolution as string | null,
     life: card.life as number,
 
     category: card.category as Category,
@@ -48,6 +49,22 @@ async function find() {
 async function findById(id: number) {
   const cards = await prisma.pokemon.findUnique({
     where: { id },
+    include: {
+      category: {},
+      pokemonType: {
+        include: {
+          type: {},
+        },
+      },
+    },
+  });
+
+  return formatPokemons([cards])[0];
+}
+
+async function findByName(name: string) {
+  const cards = await prisma.pokemon.findFirst({
+    where: { name },
     include: {
       category: {},
       pokemonType: {
@@ -120,4 +137,5 @@ export default {
   createPokemonUser,
   findPokemonsBattleByLevel,
   findById,
+  findByName,
 };

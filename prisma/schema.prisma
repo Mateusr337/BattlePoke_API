@@ -14,6 +14,7 @@ model User {
   id       Int    @id @default(autoincrement())
   name     String @unique
   email    String @unique
+  points   Int    @default(0)
   password String
   level    String @default("0")
   imageURL String
@@ -33,11 +34,13 @@ model Pokemon {
   life       Int
   attack     Int
   imageURL   String
+  evolution  String?
 
   pokemonUser   PokemonUser[]
   battlePokemon BattlePokemon[]
   pokemonLevel  PokemonLevel[]
   pokemonType   PokemonType[]
+
   @@map("pokemons")
 }
 
@@ -96,7 +99,6 @@ model BattlePokemon {
   battle    Battle  @relation(fields: [battleId], references: [id])
   pokemonId Int
   pokemon   Pokemon @relation(fields: [pokemonId], references: [id])
-
 
   @@map("battlesUsersPokemons")
 }

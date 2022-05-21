@@ -30,4 +30,10 @@ cardRouter.get(
   cardController.findByBattleId
 );
 
+cardRouter.get(
+  "/cards/:name",
+  ensureAuthenticatedMiddleware,
+  cardController.findByName
+);
+
 export default cardRouter;
