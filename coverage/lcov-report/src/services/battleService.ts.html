@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/routers/userRouter.ts</title>
+    <title>Code coverage report for src/services/battleService.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/routers</a> userRouter.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/services</a> battleService.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/8</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -100,86 +100,80 @@
 <a name='L35'></a><a href='#L35'>35</a>
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
-<a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a>
-<a name='L40'></a><a href='#L40'>40</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L38'></a><a href='#L38'>38</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Router } from "express";
-import userController from "../controllers/userController.js";
-import { ensureAuthenticatedMiddleware } from "../middlewares/ensureAuthenticatedMiddleware.js";
-import { validateSchemaMiddleware } from "../middlewares/validateSchemaMiddleware.js";
-import authSchema from "../schemas/authSchema.js";
-import userSchema from "../schemas/userSchema.js";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { UpdateBattle } from "./../repositories/battleRepository";
+import battleRepository, {
+  BattleLevel,
+} from "../repositories/battleRepository.js";
+import battlePokemonRepository from "../repositories/battlePokemonRepository.js";
 &nbsp;
-const userRouter = Router();
+async function <span class="fstat-no" title="function not covered" >create(</span>
+  level: BattleLevel,
+  userId: number,
+  pokemonsIds: Array&lt;number&gt;
+) {
+  const battle = <span class="cstat-no" title="statement not covered" >await battleRepository.create(userId, level);</span>
+<span class="cstat-no" title="statement not covered" >  await battlePokemonRepository.create(pokemonsIds, battle.id);</span>
 &nbsp;
-userRouter.post(
-  "/users",
-  validateSchemaMiddleware(userSchema),
-  userController.create
-);
-userRouter.get(
-  "/users",
-  ensureAuthenticatedMiddleware,
-  userController.findByIdOrFail
-);
+<span class="cstat-no" title="statement not covered" >  return battle;</span>
+}
 &nbsp;
-userRouter.post(
-  "/users/validToken",
-  ensureAuthenticatedMiddleware,
-  userController.responseToken
-);
+async function <span class="fstat-no" title="function not covered" >findById(</span>id: number) {
+  const battle = <span class="cstat-no" title="statement not covered" >await battleRepository.findById(id);</span>
+<span class="cstat-no" title="statement not covered" >  return battle;</span>
+}
 &nbsp;
-userRouter.post(
-  "/users/login",
-  validateSchemaMiddleware(authSchema),
-  userController.valid
-);
+async function <span class="fstat-no" title="function not covered" >findByUser(</span>userId: number) {
+  const battles = <span class="cstat-no" title="statement not covered" >await battleRepository.findByUser(userId);</span>
+<span class="cstat-no" title="statement not covered" >  return battles;</span>
+}
 &nbsp;
-userRouter.patch(
-  "/users/upLevels",
-  ensureAuthenticatedMiddleware,
-  userController.updateLevel
-);
+async function <span class="fstat-no" title="function not covered" >update(</span>id: number, data: UpdateBattle) {
+<span class="cstat-no" title="statement not covered" >  await battleRepository.update(data, id);</span>
+}
 &nbsp;
-export default userRouter;
+export default {
+  create,
+  findById,
+  findByUser,
+  update,
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

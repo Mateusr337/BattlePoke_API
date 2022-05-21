@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for src/routers/userRouter.ts</title>
+    <title>Code coverage report for src/controllers/battleController.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/routers</a> userRouter.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/controllers</a> battleController.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>0/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/14</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line low'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -106,80 +106,80 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Router } from "express";
-import userController from "../controllers/userController.js";
-import { ensureAuthenticatedMiddleware } from "../middlewares/ensureAuthenticatedMiddleware.js";
-import { validateSchemaMiddleware } from "../middlewares/validateSchemaMiddleware.js";
-import authSchema from "../schemas/authSchema.js";
-import userSchema from "../schemas/userSchema.js";
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Request, Response } from "express";
+import battleService from "../services/battleService.js";
 &nbsp;
-const userRouter = Router();
+async function <span class="fstat-no" title="function not covered" >create(</span>req: Request, res: Response) {
+  const { pokemonsIds, level } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+  const { user } = <span class="cstat-no" title="statement not covered" >res.locals;</span>
 &nbsp;
-userRouter.post(
-  "/users",
-  validateSchemaMiddleware(userSchema),
-  userController.create
-);
-userRouter.get(
-  "/users",
-  ensureAuthenticatedMiddleware,
-  userController.findByIdOrFail
-);
+  const battle = <span class="cstat-no" title="statement not covered" >await battleService.create(level, user.id, pokemonsIds);</span>
+<span class="cstat-no" title="statement not covered" >  res.status(201).send(battle);</span>
+}
 &nbsp;
-userRouter.post(
-  "/users/validToken",
-  ensureAuthenticatedMiddleware,
-  userController.responseToken
-);
+async function <span class="fstat-no" title="function not covered" >findById(</span>req: Request, res: Response) {
+  const id = <span class="cstat-no" title="statement not covered" >parseInt(req.params.id);</span>
 &nbsp;
-userRouter.post(
-  "/users/login",
-  validateSchemaMiddleware(authSchema),
-  userController.valid
-);
+  const battle = <span class="cstat-no" title="statement not covered" >await battleService.findById(id);</span>
+<span class="cstat-no" title="statement not covered" >  res.send(battle);</span>
+}
 &nbsp;
-userRouter.patch(
-  "/users/upLevels",
-  ensureAuthenticatedMiddleware,
-  userController.updateLevel
-);
+async function <span class="fstat-no" title="function not covered" >findByUser(</span>req: Request, res: Response) {
+  const { user } = <span class="cstat-no" title="statement not covered" >res.locals;</span>
 &nbsp;
-export default userRouter;
+  const battles = <span class="cstat-no" title="statement not covered" >await battleService.findByUser(user.id);</span>
+<span class="cstat-no" title="statement not covered" >  res.send(battles);</span>
+}
+&nbsp;
+async function <span class="fstat-no" title="function not covered" >update(</span>req: Request, res: Response) {
+  const data = <span class="cstat-no" title="statement not covered" >req.body;</span>
+  const { id } = <span class="cstat-no" title="statement not covered" >req.body;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  await battleService.update(id, data);</span>
+<span class="cstat-no" title="statement not covered" >  res.sendStatus(204);</span>
+}
+&nbsp;
+export default {
+  create,
+  findById,
+  findByUser,
+  update,
+};
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

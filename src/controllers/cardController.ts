@@ -30,11 +30,10 @@ async function findPokemonsByLevel(req: Request, res: Response) {
   res.send(cards);
 }
 
-async function findByUserAndBattle(req: Request, res: Response) {
-  const { user } = res.locals;
+async function findByBattleId(req: Request, res: Response) {
   const battleId = parseInt(req.params.battleId);
 
-  const cards = await cardService.findByUserAndBattle(user.id, battleId);
+  const cards = await cardService.findByBattleId(battleId);
   res.send(cards);
 }
 
@@ -43,5 +42,5 @@ export default {
   createPokemonUser,
   find,
   findPokemonsByLevel,
-  findByUserAndBattle,
+  findByBattleId,
 };

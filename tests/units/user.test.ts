@@ -20,31 +20,31 @@ describe("POST /users", () => {
   });
 });
 
-// describe("POST /users/login", () => {
-//   it("should answer with status code 409", async () => {
-//     const user = {
-//       id: 1,
-//       ...userFactory.createUserInsertData(),
-//       level: "0",
-//     };
+describe("POST /users/login", () => {
+  it("should answer with status code 409", async () => {
+    const user = {
+      id: 1,
+      ...userFactory.createUserInsertData(),
+      level: "0",
+    };
 
-//     jest.spyOn(userRepository, "findByEmail").mockResolvedValueOnce(user);
+    jest.spyOn(userRepository, "findByEmail").mockResolvedValueOnce(user);
 
-//     expect(async () => {
-//       await userService.create(user);
-//     }).rejects.toEqual(errorFunctions.conflictRequestError("user"));
-//   });
-// });
+    expect(async () => {
+      await userService.create(user);
+    }).rejects.toEqual(errorFunctions.conflictRequestError("user"));
+  });
+});
 
-// describe("function findById", () => {
-//   it("should answer with status code 409", async () => {
-//     const user = await userFactory.createUser();
+describe("function findById", () => {
+  it("should answer with status code 409", async () => {
+    const user = await userFactory.createUser();
 
-//     const spy = jest
-//       .spyOn(userRepository, "findById")
-//       .mockResolvedValueOnce(null);
-//     await userService.findById(user.id);
+    const spy = jest
+      .spyOn(userRepository, "findById")
+      .mockResolvedValueOnce(null);
+    await userService.findById(user.id);
 
-//     expect(spy).toBeCalledWith(user.id);
-//   });
-// });
+    expect(spy).toBeCalledWith(user.id);
+  });
+});
