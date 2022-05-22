@@ -44,6 +44,14 @@ async function findByName(req: Request, res: Response) {
   res.send(card);
 }
 
+async function evolution(req: Request, res: Response) {
+  const { pokemonId } = req.body;
+  const { user } = res.locals;
+
+  const newCard = await cardService.evolution(user.id, pokemonId);
+  res.send(newCard).status(204);
+}
+
 export default {
   findByUser,
   createPokemonUser,
@@ -51,4 +59,5 @@ export default {
   findPokemonsByLevel,
   findByBattleId,
   findByName,
+  evolution,
 };

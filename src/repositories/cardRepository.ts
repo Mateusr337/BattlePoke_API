@@ -9,6 +9,7 @@ interface FormattedPokemon {
   imageURL: string;
   name: string;
   category: Category;
+  evolution: string;
   types: Array<Type>;
 }
 
