@@ -9,17 +9,17 @@ const config = (token: string) => {
   };
 };
 
-function createUserInsertData() {
+function createUserInsertData(points?: number) {
   return {
     email: faker.internet.email(),
     name: faker.name.firstName(),
     imageURL: faker.internet.url(),
-    points: 0,
+    points: points || 0,
     password: "123456",
   };
 }
 
-async function createUser() {
+async function createUser(points?: number) {
   const userPartialData = createUserInsertData();
 
   const hashPassword = encryptFunctions.encryptData(userPartialData.password);
@@ -39,8 +39,8 @@ async function createUser() {
   };
 }
 
-async function createLogin() {
-  const user = await createUser();
+async function createLogin(points?: number) {
+  const user = await createUser(points);
 
   const expiration = { expiresIn: 60 * 60 * 24 * 30 };
   const token: string = jwt.sign(

@@ -49,7 +49,7 @@ async function evolution(req: Request, res: Response) {
   const { user } = res.locals;
 
   const newCard = await cardService.evolution(user.id, pokemonId);
-  res.send(newCard).status(204);
+  res.status(204).send(newCard);
 }
 
 async function remove(req: Request, res: Response) {

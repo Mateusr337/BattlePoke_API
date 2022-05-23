@@ -57,7 +57,7 @@ export default async function seed() {
 
     const createdPokemon = await prisma.pokemon.upsert({
       where: { name: pokemon.name },
-      update: {},
+      update: { ...pokemon },
       create: {
         ...pokemon,
         categoryId: id,

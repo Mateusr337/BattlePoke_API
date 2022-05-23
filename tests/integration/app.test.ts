@@ -24,6 +24,7 @@ describe("users", () => {
 
     it("should answer with status code 201", async () => {
       const userData = userFactory.createUserInsertData();
+      delete userData.points;
 
       const res = await agent.post("/users").send(userData);
       const userCreated = await prisma.user.findFirst({
@@ -106,6 +107,11 @@ describe("users", () => {
 });
 
 describe("pokemons", () => {
+  beforeEach(async () => {
+    await truncate("pokemonsUsers");
+    await truncate("users");
+  });
+
   describe("GET /cards", () => {
     beforeEach(async () => {
       await truncate("users");
@@ -122,10 +128,6 @@ describe("pokemons", () => {
   });
 
   describe("POST /cards", () => {
-    beforeEach(async () => {
-      await truncate("pokemonsUsers");
-    });
-
     it("should answer with status code 201", async () => {
       const user = await userFactory.createLogin();
 
@@ -186,6 +188,54 @@ describe("pokemons", () => {
 
       expect(res.status).toEqual(200);
       expect(res.body.length).toEqual(3);
+    });
+  });
+
+  describe("GET /cards/:name", () => {
+    it("should answer with pokemon object", async () => {
+      const user = await userFactory.createLogin();
+
+      const res = await agent.get(`/cards/charizard`).set(user.authorization);
+
+      expect(res.body).not.toBeNull();
+    });
+  });
+
+  describe("GET /cards/evolution", () => {
+    it("should answer with pokemon id different", async () => {
+      const user = await userFactory.createLogin(5);
+
+      const pokemon = await pokemonsFactory.createPokemonUser(
+        "charmander",
+        user.id
+      );
+
+      const res = await agent
+        .patch("/cards/evolution")
+        .set(user.authorization)
+        .send({ pokemonId: pokemon.id });
+
+      const pokemonUser = await prisma.pokemonUser.findFirst();
+
+      expect(res.status).toEqual(204);
+      expect(pokemonUser.id).not.toEqual(pokemon.id);
+    });
+  });
+
+  describe("DELETE /cards/remove", () => {
+    it("should answer with pokemon user empty", async () => {
+      const user = await userFactory.createLogin();
+
+      const pokemon = await pokemonsFactory.createPokemonUser("eevee", user.id);
+
+      const res = await agent
+        .delete(`/cards/${pokemon.id}`)
+        .set(user.authorization);
+
+      const pokemnosUser = await prisma.pokemonUser.findMany();
+
+      expect(res.status).toEqual(202);
+      expect(pokemnosUser.length).toEqual(0);
     });
   });
 });
@@ -249,13 +299,13 @@ describe("battles", () => {
       const res = await agent
         .patch("/battles")
         .set(user.authorization)
-        .send({ id: battle.id, finish: true, wins: false });
+        .send({ id: battle.id, finish: true, wins: true });
 
       const battleUp = await prisma.battle.findFirst();
 
       expect(res.status).toEqual(204);
       expect(battleUp.finish).toEqual(true);
-      expect(battleUp.wins).toEqual(false);
+      expect(battleUp.wins).toEqual(true);
     });
   });
 });
