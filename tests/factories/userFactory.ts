@@ -14,6 +14,7 @@ function createUserInsertData() {
     email: faker.internet.email(),
     name: faker.name.firstName(),
     imageURL: faker.internet.url(),
+    points: 0,
     password: "123456",
   };
 }
@@ -42,7 +43,11 @@ async function createLogin() {
   const user = await createUser();
 
   const expiration = { expiresIn: 60 * 60 * 24 * 30 };
-  const token: string = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, expiration);
+  const token: string = jwt.sign(
+    { userId: user.id },
+    process.env.JWT_SECRET,
+    expiration
+  );
 
   await prisma.session.create({
     data: { token },
