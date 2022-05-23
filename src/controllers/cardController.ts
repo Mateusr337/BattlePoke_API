@@ -52,6 +52,14 @@ async function evolution(req: Request, res: Response) {
   res.send(newCard).status(204);
 }
 
+async function remove(req: Request, res: Response) {
+  const pokemonId = parseInt(req.params.id);
+  const { user } = res.locals;
+
+  await cardService.remove(user.id, pokemonId);
+  res.sendStatus(202);
+}
+
 export default {
   findByUser,
   createPokemonUser,
@@ -60,4 +68,5 @@ export default {
   findByBattleId,
   findByName,
   evolution,
+  remove,
 };

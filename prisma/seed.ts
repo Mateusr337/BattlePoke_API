@@ -107,6 +107,47 @@ export default async function seed() {
   ];
 
   await insertPokemonsBattles(pokemonsData, 3);
+
+  pokemonsData = [
+    await getPokemonByName("meowth"),
+    await getPokemonByName("raichu"),
+    await getPokemonByName("mewtwo"),
+  ];
+
+  await insertPokemonsBattles(pokemonsData, 4);
+
+  pokemonsData = [
+    await getPokemonByName("snorlax"),
+    await getPokemonByName("raichu"),
+    await getPokemonByName("charizard"),
+  ];
+
+  await insertPokemonsBattles(pokemonsData, 5);
+
+  pokemonsData = [
+    await getPokemonByName("snorlax"),
+    await getPokemonByName("mewtwo"),
+    await getPokemonByName("charizard"),
+  ];
+
+  await insertPokemonsBattles(pokemonsData, 6);
+
+  pokemonsData = [
+    await getPokemonByName("ninetales"),
+    await getPokemonByName("mewtwo"),
+    await getPokemonByName("charizard"),
+  ];
+
+  await insertPokemonsBattles(pokemonsData, 7);
+
+  pokemonsData = [
+    await getPokemonByName("zubat"),
+    await getPokemonByName("mewtwo"),
+    await getPokemonByName("snorlax"),
+    await getPokemonByName("caterpie"),
+  ];
+
+  await insertPokemonsBattles(pokemonsData, 8);
 }
 
 seed()

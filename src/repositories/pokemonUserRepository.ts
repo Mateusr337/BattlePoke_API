@@ -21,7 +21,14 @@ async function update(data: updatePokemonUser, id: number) {
   return pokemonUser;
 }
 
+async function remove(id: number) {
+  await prisma.pokemonUser.delete({
+    where: { id },
+  });
+}
+
 export default {
   find,
   update,
+  remove,
 };

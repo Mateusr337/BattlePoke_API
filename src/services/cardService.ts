@@ -69,6 +69,12 @@ async function evolution(userId: number, pokemonId: number) {
   return evolution;
 }
 
+async function remove(userId: number, pokemonId: number) {
+  const pokemonUser = await pokemonUserRepository.find(userId, pokemonId);
+
+  await pokemonUserRepository.remove(pokemonUser.id);
+}
+
 export default {
   findByUser,
   find,
@@ -77,4 +83,5 @@ export default {
   findByBattleId,
   findByName,
   evolution,
+  remove,
 };

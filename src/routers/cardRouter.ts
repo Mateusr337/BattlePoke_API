@@ -45,4 +45,10 @@ cardRouter.patch(
   cardController.evolution
 );
 
+cardRouter.delete(
+  "/cards/:id",
+  ensureAuthenticatedMiddleware,
+  cardController.remove
+);
+
 export default cardRouter;
