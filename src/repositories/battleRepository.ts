@@ -21,10 +21,11 @@ async function create(userId: number, Level: BattleLevel) {
 }
 
 async function update(data: UpdateBattle, id: number) {
-  await prisma.battle.update({
+  const battle = await prisma.battle.update({
     where: { id },
     data,
   });
+  return battle;
 }
 
 async function findById(id: number) {

@@ -1,11 +1,22 @@
+import { User } from "@prisma/client";
 import { prisma } from "./../database.js";
 
 export interface InsertUserData {
   email: string;
   name: string;
   password: string;
+  points: number;
   imageURL: string;
   level: string;
+}
+
+export interface updateUser {
+  email?: string;
+  name?: string;
+  password?: string;
+  points?: number;
+  imageURL?: string;
+  level?: string;
 }
 
 async function create(data: InsertUserData) {
@@ -33,10 +44,10 @@ async function sessionFind(token: string) {
   return session;
 }
 
-async function updateLevel(userId: number, newLevel: string) {
+async function update(data: updateUser, id: number) {
   await prisma.user.update({
-    where: { id: userId },
-    data: { level: newLevel },
+    where: { id },
+    data,
   });
 }
 
@@ -46,5 +57,5 @@ export default {
   sessionInsert,
   sessionFind,
   findById,
-  updateLevel,
+  update,
 };

@@ -62,7 +62,7 @@ async function updateLevel(userId: number, newLevel: string) {
   if (parseInt(newLevel) <= 0 || parseInt(newLevel) > 4) {
     throw errorFunctions.badRequestError("level");
   }
-  await userRepository.updateLevel(userId, newLevel);
+  await userRepository.update({ level: newLevel }, userId);
 }
 
 export default {

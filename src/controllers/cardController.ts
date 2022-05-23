@@ -37,10 +37,36 @@ async function findByBattleId(req: Request, res: Response) {
   res.send(cards);
 }
 
+async function findByName(req: Request, res: Response) {
+  const { name } = req.params;
+
+  const card = await cardService.findByName(name);
+  res.send(card);
+}
+
+async function evolution(req: Request, res: Response) {
+  const { pokemonId } = req.body;
+  const { user } = res.locals;
+
+  const newCard = await cardService.evolution(user.id, pokemonId);
+  res.send(newCard).status(204);
+}
+
+async function remove(req: Request, res: Response) {
+  const pokemonId = parseInt(req.params.id);
+  const { user } = res.locals;
+
+  await cardService.remove(user.id, pokemonId);
+  res.sendStatus(202);
+}
+
 export default {
   findByUser,
   createPokemonUser,
   find,
   findPokemonsByLevel,
   findByBattleId,
+  findByName,
+  evolution,
+  remove,
 };
