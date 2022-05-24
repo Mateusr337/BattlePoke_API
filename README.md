@@ -4,7 +4,7 @@
 
 An application of an Pokemon card battle game where each player initially receives 3 cards and can start to battle and gain evolution points. When you beat a level the next one is unlocked, totaling 8 levels. You can also add 5 evolution points and if the pokemon has an evolution you can evolve it and still see its battle history.
 
-Front end in: https://github.com/Mateusr337/BattlePoke/blob/main/README.md
+Front end in: https://github.com/Mateusr337/BattlePoke
 
 </div>
 
