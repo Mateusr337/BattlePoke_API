@@ -42,7 +42,7 @@ Front end in: https://github.com/Mateusr337/BattlePoke
 
 ```
 # Clone this repo
-$ git clone https://github.com/Mateusr337/RepoTest_API.git
+$ git clone https://github.com/Mateusr337/BattlePoke_API.git
 
 # Clone the front-end repository and follow the instructions to run
 $ git clone https://github.com/Mateusr337/BattlePoke.git
