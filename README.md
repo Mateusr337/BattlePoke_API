@@ -25,8 +25,6 @@ Front end in: https://github.com/Mateusr337/BattlePoke
 ## :woman_technologist: Technologies
 
 <p align="center">
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
   <img src="https://img.shields.io/badge/typescript-3178C6?style=for-the-badge&logo=typescript&logoColor=black" />
   <img src="https://img.shields.io/badge/ts-node-3178C6?style=for-the-badge&logo=ts-node&logoColor=3178C6" />
   <img src="https://img.shields.io/badge/node.js-363636?style=for-the-badge&logo=node.js&logoColor=339933"/>
