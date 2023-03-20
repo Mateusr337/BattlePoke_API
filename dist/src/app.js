@@ -4,13 +4,9 @@ import "express-async-errors";
 import router from "./routers/index.js";
 import "./setup.js";
 import errorFunctions from "./utils/errorFunctions.js";
-
-const app = express();
-
+var app = express();
 app.use(json());
 app.use(cors());
 app.use(router);
-
 app.use(errorFunctions.errorHandlingMiddleware);
-
 export default app;
