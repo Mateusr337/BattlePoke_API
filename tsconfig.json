@@ -5,7 +5,7 @@
     "module": "es6",
     "moduleResolution": "node",
     "outDir": "dist",
-    "types": []
+    "types": ["jest", "node"]
   },
   "ts-node": {
     "esm": true
