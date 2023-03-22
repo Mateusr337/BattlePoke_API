@@ -11,7 +11,7 @@
     "test": "dotenv -e .env.test npx prisma migrate dev && dotenv -e .env.test npx prisma db seed && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
     "dev": "nodemon src/server.ts",
     "prepare": "prisma migrate",
-    "start": "nodemon src/server.ts",
+    "start": "nodemon dist/src/server.js",
     "build": "rimraf dist && tsc && prisma generate",
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist"
