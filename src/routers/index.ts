@@ -9,7 +9,4 @@ router.use(userRouter);
 router.use(cardsRouter);
 router.use(battleRouter);
 
-// if (process.env.NODE_ENV === "test") {
-//   router.use(e2eRouter);
-// }
 export default router;

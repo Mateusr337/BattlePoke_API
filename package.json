@@ -11,20 +11,13 @@
     "test": "dotenv -e .env.test npx prisma migrate dev && dotenv -e .env.test npx prisma db seed && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i",
     "dev": "nodemon src/server.ts",
     "prepare": "prisma migrate",
-    "start": "nodemon dist/src/server.js",
-    "build": "rimraf dist && tsc && prisma generate",
-    "ts.check": "tsc --project tsconfig.json",
-    "add-build": "git add dist"
+    "build": "npx tsc --outDir dist && prisma generate",
+    "start": "node dist/src/server.js"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts",
     "execute": "node dist/prisma/seed.js"
   },
-  "pre-commit": [
-    "ts.check",
-    "build",
-    "add-build"
-  ],
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -56,8 +49,6 @@
     "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
     "joi": "^17.6.0",
-    "jsonwebtoken": "^8.5.1",
-    "pre-commit": "^1.2.2",
-    "rimraf": "^4.4.1"
+    "jsonwebtoken": "^8.5.1"
   }
 }
